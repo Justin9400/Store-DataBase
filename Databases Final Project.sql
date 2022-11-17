@@ -30,7 +30,6 @@ CREATE TABLE Cart(
 	itemID VARCHAR(255), 
     price FLOAT(7, 2),
     quantity INT,
-    total FLOAT(10, 2),
   	PRIMARY KEY(customerID)
 );
 
