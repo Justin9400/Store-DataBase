@@ -55,7 +55,7 @@ CREATE TABLE items(
 );
 
 CREATE TABLE bill(
-	customerID INT,
+	customerId INT,
 	acctNo INT, 
 	orderNo INT, 
 	itemId INT, 
@@ -129,6 +129,20 @@ INSERT INTO discount VALUES (232323, .50);
 INSERT INTO discount VALUES (343434, .50);
 INSERT INTO discount VALUES (454545, .10);
 INSERT INTO discount VALUES (565656, .05);
+
+CREATE INDEX index_lastname
+ON customer (lName);
+
+SELECT * FROM bill WHERE customerId = '00001' ;
+SELECT * FROM bill WHERE customerId = (SELECT customerId FROM customer c WHERE lname = 'Lloyd');
+SELECT * FROM items;
+SELECT userId, password FROM credentials WHERE userId = '11111' AND password = 'Password';
+SELECT itemName FROM items WHERE itemId = '121212';
+-- ERM
+-- NORMALIZED WITH COMMENTS
+-- EXPLANATION HOW THE PROGRAM WORKS
+-- LABOR SHARING TABLE
+-- IF WE HAD MORE TIME HOW WOULD WE EXPAND
 
 
 
