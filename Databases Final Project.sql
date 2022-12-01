@@ -138,15 +138,13 @@ SELECT * FROM bill WHERE customerId = (SELECT customerId FROM customer c WHERE l
 SELECT * FROM items;
 SELECT userId, password FROM credentials WHERE userId = '11111' AND password = 'Password';
 SELECT itemName FROM items WHERE itemId = '121212';
+
+-- select functions for #8--
+create view avgPurchases as select zipcode, sum(total)/count(total) as average from bill group by zipcode order by zipcode asc;
+select * from avgPurchases;
+
 -- ERM
 -- NORMALIZED WITH COMMENTS
 -- EXPLANATION HOW THE PROGRAM WORKS
 -- LABOR SHARING TABLE
 -- IF WE HAD MORE TIME HOW WOULD WE EXPAND
-
-
-
-
-
-
-
