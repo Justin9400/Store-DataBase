@@ -1,8 +1,8 @@
 import pymysql
 import pandas as pd
 
-cnx =pymysql.connect(user='root', password='password', host='localhost', database='OnlinePurchaseDB')
-cr=cnx.cursor()
+cnx = pymysql.connect(user='root', password='password', host='localhost', database='OnlinePurchaseDB')
+cr = cnx.cursor()
 
 while True:
     returningUser = str(input("Are you a returning user? (y/n) "))
@@ -32,12 +32,12 @@ elif returningUser.lower() == 'n':
     DOB = str(input("Date of Birth: "))
     userName = str(input("Username: "))
     password = str(input("Password: "))
-
-    # try:
-    #     query = "INSERT INTO customer VALUES ({}, {}, {}, {}, {}, {})
-    #     result = cr.execute(query)
-    # except: 
-    #     print("Invalid UserId or Password")
+    address = str(input("Home Street Address: "))
+    try:
+        query = "INSERT INTO customer VALUES ({}, {}, {}, {}, {}, {})".format(userName, None, fname, lname, DOB, address)
+        result = cr.execute(query)
+    except: 
+        print("Invalid UserId or Password")
 
     print("User Successfully Created!")
 
