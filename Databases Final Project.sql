@@ -3,13 +3,13 @@ CREATE DATABASE OnlinePurchaseDB;
 USE OnlinePurchaseDB;
 
 CREATE TABLE credentials(
-	userId INT,
+	username  VARCHAR(255),
 	password VARCHAR(255),
   	PRIMARY KEY(userId)
 );
 
 CREATE TABLE customer(
-	userId INT,
+	username  VARCHAR(255),
 	customerId INT,
     fname VARCHAR(255),
     lname VARCHAR(255),
@@ -71,17 +71,17 @@ CREATE TABLE discount(
 	PRIMARY KEY(itemID)
 );
 
-INSERT INTO credentials VALUES (11111, "Password");
-INSERT INTO credentials VALUES (22222, "IceCream");
-INSERT INTO credentials VALUES (33333, "PaSsWoRd");
-INSERT INTO credentials VALUES (44444, "ThisPassword");
-INSERT INTO credentials VALUES (55555, "HelloWorld");
+INSERT INTO credentials VALUES ("JohnD123", "Password");
+INSERT INTO credentials VALUES ("JackL456", "IceCream");
+INSERT INTO credentials VALUES ("Matt789", "PaSsWoRd");
+INSERT INTO credentials VALUES ("LizA987", "ThisPassword");
+INSERT INTO credentials VALUES ("LaurenP654", "HelloWorld");
 
-INSERT INTO customer VALUES (11111, 00001, "John", "Doe", "1993-04-21", "497 Lakewood St");
-INSERT INTO customer VALUES (22222, 00002, "Jack", "Lloyd", "2000-05-15", "381 College St");
-INSERT INTO customer VALUES (33333, 00003, "Matt", "Dunn", "1985-01-05", "9101 Main St");
-INSERT INTO customer VALUES (44444, 00004, "Liz", "Alford", "1993-06-29", "1174 Clearly Ln");
-INSERT INTO customer VALUES (55555, 00005, "Lauren", "Peach", "1991-12-19", "876 Dreary Ln");
+INSERT INTO customer VALUES ("JohnD123", 00001, "John", "Doe", "1993-04-21", "497 Lakewood St");
+INSERT INTO customer VALUES ("JackL456", 00002, "Jack", "Lloyd", "2000-05-15", "381 College St");
+INSERT INTO customer VALUES ("Matt789", 00003, "Matt", "Dunn", "1985-01-05", "9101 Main St");
+INSERT INTO customer VALUES ("LizA987", 00004, "Liz", "Alford", "1993-06-29", "1174 Clearly Ln");
+INSERT INTO customer VALUES ("LaurenP654", 00005, "Lauren", "Peach", "1991-12-19", "876 Dreary Ln");
 
 
 INSERT INTO Cart VALUES (00001, 121212, CURDATE(), 1);
@@ -136,8 +136,14 @@ ON customer (lName);
 SELECT * FROM bill WHERE customerId = '00001' ;
 SELECT * FROM bill WHERE customerId = (SELECT customerId FROM customer c WHERE lname = 'Lloyd');
 SELECT * FROM items;
-SELECT userId, password FROM credentials WHERE userId = '11111' AND password = 'Password';
+SELECT username, password FROM credentials WHERE username ="JohnD123" AND password = 'Password';
 SELECT itemName FROM items WHERE itemId = '121212';
+
+-- index for #6--
+CREATE INDEX last_name on customer(lname);
+
+-- select statement for #7--
+select orderNo as custBill from bill where customerId = '3';
 
 -- select functions for #8--
 create view avgPurchases as select zipcode, sum(total)/count(total) as average from bill group by zipcode order by zipcode asc;
